@@ -4,6 +4,7 @@ import Layout from '@/views/Layout/index.vue'
 import Home from '@/views/Home/index.vue'
 import Category from '@/views/Category/index.vue'
 import SubCategory from '@/views/SubCategory/index.vue'
+import Detail from '@/views/Detail/index.vue'
 
 
 
@@ -27,6 +28,10 @@ const router = createRouter({
                     path: '/category/sub/:id',
                     name: 'subCategory',
                     component: SubCategory
+                },{
+                    path: 'detail/:id',
+                    name: 'detail',
+                    component: Detail
                 }
             ]
         },
@@ -34,7 +39,14 @@ const router = createRouter({
             path: '/login',
             component: Login
         }
-    ]
+    ],
+    // 定制路由滚动行为
+    scrollBehavior(){
+        return {
+            top: 0
+        }
+    }
+
 })
 
 export default router
