@@ -1,34 +1,13 @@
 <script setup>
-import { getCategoryAPI } from '@/apis/category'
-import { onMounted, ref } from 'vue'
-import { useRoute } from 'vue-router'
 import GoodItem from '../Home/components/GoodItem.vue'
-import { onBeforeRouteUpdate } from 'vue-router'
+import { useBanner } from './composables/useBanner'
+import { useCategory } from './composables/useCategory'
 
-const categoryData = ref({})
-const route = useRoute()
-const getCategory = async(id=route.params.id) => {
-  const res = await getCategoryAPI(id)
-  categoryData.value = res.result
-}
-onMounted(() => getCategory())
+// 获取分类数据
+const { categoryData } = useCategory()
 
-// 获取banner
-import { getBannerAPI } from '@/apis/home'
-const bannerList = ref([])
-const getBanner = async () => {
-    const res = await getBannerAPI({
-      distributionSite: '2'
-    })
-    bannerList.value = res.result
-}
-onMounted(() => getBanner())
-
-// 目标：路由参数变化的时候，可以把分类接口重新发送
-onBeforeRouteUpdate((to) => {
-  getCategory(to.params.id)
-
-})
+// 获取banner数据
+const { bannerList } = useBanner()
 
 </script>
 
@@ -55,8 +34,8 @@ onBeforeRouteUpdate((to) => {
         <h3>全部分类</h3>
         <ul>
           <li v-for="i in categoryData.children" :key="i.id">
-            <RouterLink to="/">
-              <img :src="i.picture" />
+            <RouterLink :to="`/category/sub/${i.id}`">
+              <img v-img-lazy="i.picture" />
               <p>{{ i.name }}</p>
             </RouterLink>
           </li>
