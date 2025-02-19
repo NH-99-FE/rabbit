@@ -1,5 +1,9 @@
 <script setup>
 import { ref } from 'vue'
+import { loginAPI } from '@/apis/user.js'
+import { ElMessage } from 'element-plus'
+import 'element-plus/theme-chalk/el-message.css'
+import { useRouter } from 'vue-router'
 
 // 表单验证 （账户名+密码）
 // 1.准备表单对象
@@ -34,11 +38,19 @@ const rules = {
 
 // 3. 获取form实例做统一校验
 const formRef = ref(null)
+const router = useRouter()
 const doLogin = () => {
-  formRef.value.validate((valid) => {
+  const { account, password } = form.value
+  formRef.value.validate( async(valid) => {
     // valid：所有表单都通过验证 才为true
     if(valid){
       // TODO LOGIN
+      const res = await loginAPI({account, password})
+      // 1. 提示用户
+      ElMessage({ type: 'success', message: '登录成功' })
+      // 2. 跳转首页
+      router.replace({ path: '/' })
+
     }
   })
 }
