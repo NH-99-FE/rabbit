@@ -5,7 +5,7 @@ import Home from '@/views/Home/index.vue'
 import Category from '@/views/Category/index.vue'
 import SubCategory from '@/views/SubCategory/index.vue'
 import Detail from '@/views/Detail/index.vue'
-import CartList from '@/views/CateList/indev.vue'
+import CartList from '@/views/CateList/index.vue'
 
 
 

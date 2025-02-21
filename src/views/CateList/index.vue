@@ -1,8 +1,13 @@
 <script setup>
 import { useCartStore } from '@/stores/cartStore'
 import { storeToRefs } from 'pinia'
+const cartStore = useCartStore()
+const { cartList ,allCount, allPrice} = storeToRefs(cartStore)
+// 单选回调
+const singleCheck = (i,selected) => {
 
-const { cartList ,allCount, allPrice} = storeToRefs(useCartStore())
+  cartStore.singleCheck(i.skuId,selected)
+}
 
 </script>
 
@@ -27,7 +32,8 @@ const { cartList ,allCount, allPrice} = storeToRefs(useCartStore())
           <tbody>
             <tr v-for="i in cartList" :key="i.id">
               <td>
-                <el-checkbox />
+                <!-- 单选框 -->
+                <el-checkbox :model-value="i.selected" @change="(selected) => singleCheck(i,selected)"/>
               </td>
               <td>
                 <div class="goods">
