@@ -2,8 +2,7 @@
 import { useCartStore } from '@/stores/cartStore'
 import { toRefs } from 'vue';
 const cartStore = useCartStore()
-const {cartList} = toRefs(cartStore)
-console.log(cartList);
+const {cartList, allCount, allPrice} = toRefs(cartStore)
 
 </script>
 
@@ -35,8 +34,8 @@ console.log(cartList);
       </div>
       <div class="foot">
         <div class="total">
-          <p>共 10 件商品</p>
-          <p>&yen; 100.00 </p>
+          <p>共 {{ allCount }} 件商品</p>
+          <p>&yen; {{ allPrice.toFixed(2) }} </p>
         </div>
         <el-button size="large" type="primary" >去购物车结算</el-button>
       </div>
