@@ -2,7 +2,7 @@
 import { useCartStore } from '@/stores/cartStore'
 import { storeToRefs } from 'pinia'
 const cartStore = useCartStore()
-const { cartList ,allCount, allPrice} = storeToRefs(cartStore)
+const { cartList ,allCount, allPrice, selectedCount, selectedPrice} = storeToRefs(cartStore)
 // 单选回调
 const singleCheck = (i,selected) => {
 
@@ -85,8 +85,8 @@ const allCheck = (selected) => {
       <!-- 操作栏 -->
       <div class="action">
         <div class="batch">
-          共 {{ allCount }} 件商品，已选择 2 件，商品合计：
-          <span class="red">¥ {{ allPrice.toFixed(2) }} </span>
+          共 {{ allCount }} 件商品，已选择 {{ selectedCount }} 件，商品合计：
+          <span class="red">¥ {{ selectedPrice.toFixed(2) }} </span>
         </div>
         <div class="total">
           <el-button size="large" type="primary" >下单结算</el-button>

@@ -45,11 +45,17 @@ const allCheck = (selected) => {
   //是否全选
   const isAll = computed(() => cartList.value.every(item => item.selected))
 
+  //计算属性 选中的总数 总价
+  const selectedCount = computed(()=> cartList.value.filter(item => item.selected === true).reduce((a,c) => a + c.count, 0) )
+  const selectedPrice = computed(()=> cartList.value.filter(item => item.selected === true).reduce((a,c) => a + c.count *c.price, 0) )
+
   return {
     cartList,
     allCount,
     allPrice,
     isAll,
+    selectedCount,
+    selectedPrice,
     allCheck,
     singleCheck,
     addCart,
