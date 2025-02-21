@@ -1,8 +1,8 @@
 <script setup>
 import { useCartStore } from '@/stores/cartStore'
-import { toRefs } from 'vue';
+import { storeToRefs } from 'pinia';
 const cartStore = useCartStore()
-const {cartList, allCount, allPrice} = toRefs(cartStore)
+const {cartList, allCount, allPrice} = storeToRefs(cartStore)
 
 </script>
 
@@ -37,7 +37,7 @@ const {cartList, allCount, allPrice} = toRefs(cartStore)
           <p>共 {{ allCount }} 件商品</p>
           <p>&yen; {{ allPrice.toFixed(2) }} </p>
         </div>
-        <el-button size="large" type="primary" >去购物车结算</el-button>
+        <el-button size="large" type="primary" @click="$router.push('/cartlist')">去购物车结算</el-button>
       </div>
     </div>
 </div>
