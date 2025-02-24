@@ -21,10 +21,7 @@ const skuChange = (sku) => {
 }
 
 let count = ref(1)
-const countChange = (value) => {
-  console.log(value);
 
-}
 // 添加购物车
 const addCart = () => {
   if(skuObj.skuId){
@@ -118,7 +115,7 @@ const addCart = () => {
               <XtxSku :goods="goods" @change="skuChange"/>
 
               <!-- 数据组件 -->
-              <el-input-number v-model="count" @change="countChange" />
+              <el-input-number v-model="count"/>
 
               <!-- 按钮组件 -->
               <div>
